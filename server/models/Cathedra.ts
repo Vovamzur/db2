@@ -31,9 +31,9 @@ export class Cathedra {
   @JoinColumn({ name: 'dean_id' })
   dean: Academic | null;
 
-  @OneToMany(() => CathedraEmployee, (cathedraemployee: CathedraEmployee) => cathedraemployee.cathedra)
-  cathedraemployees: CathedraEmployee[];
+  @OneToMany(() => CathedraEmployee, (cathedraEmployee: CathedraEmployee) => cathedraEmployee.cathedra)
+  cathedraEmployees: CathedraEmployee[];
 
-  @OneToMany(() => ScientificProposal, (scientificproposal: ScientificProposal) => scientificproposal.cathedra)
-  scientificproposals: ScientificProposal[];
+  @OneToMany(() => ScientificProposal, (scientificProposal: ScientificProposal) => scientificProposal.cathedra)
+  scientificProposals: ScientificProposal[];
 }
