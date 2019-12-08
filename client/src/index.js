@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
+import Home from './scenes/Home';
+import 'semantic-ui-css/semantic.min.css';
+import './index.css';
 
 const target = document.getElementById('root');
-render(<App />, target);
+render(<Home />, target);

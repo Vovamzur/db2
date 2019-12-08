@@ -1,31 +1,48 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { Application} from 'express';
 import { Server } from 'http';
 import cors from 'cors';
+import passport from 'passport';
+import path from 'path';
+import fs from 'fs';
 
-import { connectTodb } from './db'
-import { HTTP_PORT } from './config'
+import routes from './api/routes';
+import { connectTodb } from './db';
+import { port } from './config/port.config';
+import errorHandlerMiddlerware from './api/middlewares/error-handler.middleware';
+import './config/passport.config';
 
-const app = express();
-const server = new Server(app);
-
-app.use(cors());
-app.get('/', (req, res) => {
-  res.end('Hello wolrd!');
-});
+const app: Application = express();
+const server: Server = new Server(app);
+const staticPath: string = path.resolve(`${__dirname}/../client/build`);
 
 const startExpressServer = async () => {
-  server.listen(HTTP_PORT, () => {
-    console.log(`Server listen on ${HTTP_PORT} port`)
+  server.listen(port, () => {
+    console.log(`Server listen on ${port} port`)
   })
+}
+
+const applyMiddlewares = async () => {
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(passport.initialize());
+  routes(app);
+  app.use(express.static(staticPath));
+  // app.get('*', (req, res) => {
+  //   res.write(fs.readFileSync(`${__dirname}/../client/build/index.html`));
+  //   res.end();
+  // });
+  app.use(errorHandlerMiddlerware);
 }
 
 (async () => {
   try {
     await connectTodb();
+    await applyMiddlewares();
     await startExpressServer();
   } catch (err) {
     console.error(err);
     process.exit(-1);
   }
-})()
+})();

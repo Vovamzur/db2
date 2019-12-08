@@ -1,0 +1,12 @@
+#root {
+  height: 100%;
+  background-color: #DADADA;
+}
+
+#root > .grid {
+  height: 100%;
+}
+
+.column {
+  max-width: 450px;
+}
