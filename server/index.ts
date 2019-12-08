@@ -1,10 +1,9 @@
 import 'reflect-metadata';
-import express, { Application} from 'express';
+import express, { Application } from 'express';
 import { Server } from 'http';
 import cors from 'cors';
 import passport from 'passport';
 import path from 'path';
-import fs from 'fs';
 
 import routes from './api/routes';
 import { connectTodb } from './db';
@@ -29,10 +28,6 @@ const applyMiddlewares = async () => {
   app.use(passport.initialize());
   routes(app);
   app.use(express.static(staticPath));
-  // app.get('*', (req, res) => {
-  //   res.write(fs.readFileSync(`${__dirname}/../client/build/index.html`));
-  //   res.end();
-  // });
   app.use(errorHandlerMiddlerware);
 }
 

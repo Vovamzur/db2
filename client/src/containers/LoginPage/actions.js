@@ -3,8 +3,10 @@ import Cookies from 'js-cookie';
 import { SET_USER, SET_IS_LOADING } from './action.types';
 import * as authService from './../../services/aut.service';
 
-const setToken = (token) => localStorage.setItem('token', token);
+const setToken = token => localStorage.setItem('token', token);
 const clearToken = () => localStorage.removeItem('token');
+const setRole = role => localStorage.setItem('role', role);
+const clearRole = () => localStorage.removeItem('role');
 
 const setUser = user => ({
   type: SET_USER,
@@ -18,6 +20,7 @@ const setIsLoading = isLoading => ({
 
 const setAuthData = (user, token) => (dispatch) => {
   setToken(token);
+  setRole(user.role);
   dispatch(setUser(user));
 };
 
@@ -57,5 +60,6 @@ export const login = (request) => handleAuthResponse(authService.login(request))
 
 export const logout = () => dispatch => {
   clearToken();
+  clearRole();
   dispatch(setUser(null));
 };

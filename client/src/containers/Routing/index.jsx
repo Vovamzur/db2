@@ -35,7 +35,7 @@ const Rounting = () => {
 
       <PrivateRoute path='/'>
         <div>
-          <Header username={user ? user.name : undefined} />
+          <Header username={user ? user.role : undefined} />
           <main>
             <Switch>
               <Route path='/student' component={StudentPage} />

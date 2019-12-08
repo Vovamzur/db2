@@ -22,7 +22,7 @@ const LoginPage = () => {
       <div className="column">
         <h2 className="ui teal image header">
           <div className="content">
-            Log-in to your account
+            Log in
           </div>
         </h2>
         <form className="ui large form" onSubmit={handleLogin} noValidate>
@@ -30,10 +30,10 @@ const LoginPage = () => {
             <div className="field">
               <div className="ui left icon input">
                 <i className="user icon" />
-                <input 
-                  type="email" 
-                  name="email" 
-                  placeholder="E-mail address"
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Login"
                   value={login}
                   onChange={e => setLogin(e.target.value)} />
               </div>
@@ -41,13 +41,13 @@ const LoginPage = () => {
             <div className="field">
               <div className="ui left icon input">
                 <i className="lock icon"></i>
-                <input 
-                  type="password" 
-                  name="password" 
+                <input
+                  type="password"
+                  name="password"
                   placeholder="********"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
-                  />
+                />
               </div>
             </div>
             <button type='submit' className="ui fluid large teal submit button">Login</button>

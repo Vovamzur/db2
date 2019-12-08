@@ -6,7 +6,8 @@ import { logout } from './../../containers/LoginPage/actions';
 
 const Header = ({ username }) => {
   const dispatch = useDispatch();
-
+  let name = username.slice(1);
+  name = name[0].toUpperCase() + name.slice(1);
   return (
     <Segment clearing>
       <SHeader as="h2" floated='right'>
@@ -16,7 +17,7 @@ const Header = ({ username }) => {
         }}>Logout</Button>
       </SHeader>
       <SHeader as="h2" floated='left'>
-        { username }
+        { name }
       </SHeader>
     </Segment>
   )
