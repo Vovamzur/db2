@@ -7,8 +7,8 @@ class AddHostelResident extends Component {
     constructor() {
         super();
         this.state = {
-            firstname: 'Danielle',
-            lastname: 'Gibbs',
+            firstname: '',
+            lastname: '',
             group: '',
             privelege: null,
             hostel: '',
@@ -111,14 +111,12 @@ class AddHostelResident extends Component {
                             fluid
                             id='firstname'
                             placeholder='student firstname'
-                            value={this.state.firstname}
                             onChange={this.onChange}
                         />
                         <Form.Input
                             fluid
                             id='lastname'
                             placeholder='student lastname'
-                            value={this.state.lastname}
                             onChange={this.onChange}
                         />
                         <Form.Select
