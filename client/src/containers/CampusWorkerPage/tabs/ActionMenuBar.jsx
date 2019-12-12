@@ -9,7 +9,7 @@ class ActionMenuBar extends Component {
     constructor() {
         super();
         this.state = {
-            activeItem: 'addInventory'
+            activeItem: ''
         }
     }
 
