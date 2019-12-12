@@ -10,3 +10,9 @@
 .column {
   max-width: 450px;
 }
+
+.student-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
