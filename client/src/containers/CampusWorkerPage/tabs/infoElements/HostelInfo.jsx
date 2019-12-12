@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Image, Item, Grid, Menu, Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
-import { Hostel } from '../../../../db/db';
+import { hostelData } from '../../../../db/database';
 
 class HostelInfo extends Component {
     constructor() {
@@ -12,7 +12,7 @@ class HostelInfo extends Component {
     }
 
     componentDidMount() {
-        this.setState({  hostel:Hostel });
+        this.setState({  hostel:hostelData });
     }
 
     render() {

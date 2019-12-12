@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Form, Label } from 'semantic-ui-react'
 
-import { Hostel, Cheque, HostelResident, Student, Room, RoomType, Class, Privelege } from '../../../../db/db';
+import { hostelData, hostelResidentData, studentData, roomData, groupData, privelegeData } from '../../../../db/database';
 
 class AddHostelResident extends Component {
     constructor() {
         super();
         this.state = {
-            firstname: 'Поліна',
-            lastname: 'Сергієнко',
+            firstname: 'Danielle',
+            lastname: 'Gibbs',
             group: '',
             privelege: null,
             hostel: '',
@@ -57,52 +57,54 @@ class AddHostelResident extends Component {
         if (firstname === "" || lastname === "" || lastname === "" || group === "" || hostel === "" || room === "") {
             alert('empty fields');
         } else {
-            const privelegeId = Privelege.filter(item => item.id === privelege)[0].id;
-            const selectedRoom = Room.filter(item => item.id === room)[0]
+            const privelegeId = !privelege ? privelege : privelegeData.filter(item => item.id === privelege)[0].id;
+            const selectedRoom = roomData.filter(item => item.id === room)[0]
             const roomId = selectedRoom.id;
             const roomCapacity = selectedRoom.capacity;
-            const roomResidentsNumber = HostelResident.filter(item => item.room_id === roomId).length;
-            const student = Student.filter(item => item.firstname === firstname && item.lastname === lastname && item.class_id === group);
+            const roomResidentsNumber = hostelResidentData.filter(item => item.roomId === roomId).length;
+            const student = studentData.filter(item => item.firstname === firstname && item.lastname === lastname && item.classId === group);
+            console.log(student);
             if (student.length === 0) {
                 alert('no student with such parameters');
-            } else if (HostelResident.filter(item => item.student_id === student[0].id)) {
+            } else if (hostelResidentData.filter(item => item.studentId === student[0].id).length > 0) {
                 alert('this student already lives in a hostel');
             } else if (roomResidentsNumber >= roomCapacity) {
                 alert('room is full');
             } else {
-                const id = this.getId(HostelResident);
-                HostelResident.push(new Object({
+                const id = this.getId(hostelResidentData);
+                hostelResidentData.push(new Object({
                     id: id,
                     abilities: abilities,
-                    student_id: student[0].id,
-                    room_id: roomId,
-                    privelege_id: privelegeId
+                    studentId: student[0].id,
+                    roomId: roomId,
+                    privelegeId: privelegeId
                 }))
             }
-            console.log(HostelResident);
+            console.log(hostelResidentData);
         }
     }
 
     render() {
-        const groups = Class.map(item => new Object({
+        console.log(hostelResidentData);
+        const groups = groupData.map(item => new Object({
             key: item.title,
             text: item.title,
             value: item.id
         }));
 
-        const priveleges = Privelege.map(item => new Object({
+        const priveleges = privelegeData.map(item => new Object({
             key: item.name,
             text: item.name,
             value: item.id
         }));
 
-        const hostels = Hostel.map(item => new Object({
+        const hostels = hostelData.map(item => new Object({
             key: item.number,
             text: item.number,
             value: item.id
         }));
 
-        const hostelRooms = Room.filter(item => item.hostel_id === this.state.hostel)
+        const hostelRooms = roomData.filter(item => item.hostelId === this.state.hostel)
         const rooms = hostelRooms.map(item => new Object({
             key: item.number,
             text: item.number,

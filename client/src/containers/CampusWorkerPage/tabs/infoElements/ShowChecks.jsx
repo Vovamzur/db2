@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'semantic-ui-react'
 
-import { Hostel, Cheque, HostelResident, Student } from '../../../../db/db';
+import { chequeData, hostelResidentData, studentData } from '../../../../db/database';
 
 class ShowChecks extends Component {
     constructor() {
@@ -12,7 +12,7 @@ class ShowChecks extends Component {
     }
 
     componentDidMount() {
-        this.setState({  cheque:Cheque });
+        this.setState({  cheque:chequeData });
     }
 
     render() {
@@ -32,16 +32,16 @@ class ShowChecks extends Component {
                     </Table.Header>
 
                     <Table.Body>
-                        {cheque && cheque.map(cheque => {
-                            const resident_id = HostelResident.filter(item => item.id === cheque.hostelresident_id)[0].student_id;
-                            const student = Student.filter(item => item.id === resident_id)[0];
+                        {cheque && chequeData.map(cheque => {
+                            const resident_id = hostelResidentData.filter(item => item.id === cheque.hostelResidentId)[0].studentId;
+                            const stud = studentData.filter(item => item.id === resident_id)[0];
                             return (
                                 <Table.Row>
-                                    <Table.Cell>{cheque.payment_date}</Table.Cell>
+                                    <Table.Cell>{cheque.paymentDate}</Table.Cell>
                                     <Table.Cell>{cheque.sum}</Table.Cell>
-                                    <Table.Cell>{cheque.start_date}</Table.Cell>
-                                    <Table.Cell>{cheque.end_date}</Table.Cell>
-                                    <Table.Cell>{student.firstname} {student.lastname}</Table.Cell>
+                                    <Table.Cell>{cheque.startDate}</Table.Cell>
+                                    <Table.Cell>{cheque.endDate}</Table.Cell>
+                                    <Table.Cell>{stud.firstname} {stud.lastname}</Table.Cell>
                                 </Table.Row>
                             )
                         })}

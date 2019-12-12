@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'semantic-ui-react'
 
-import { Inventory } from '../../../../db/db';
+import { inventoryData } from '../../../../db/database';
 
 class ShowInventory extends Component {
     constructor() {
@@ -12,7 +12,7 @@ class ShowInventory extends Component {
     }
 
     componentDidMount() {
-        this.setState({  inventory:Inventory });
+        this.setState({  inventory:inventoryData });
     }
 
     render() {
