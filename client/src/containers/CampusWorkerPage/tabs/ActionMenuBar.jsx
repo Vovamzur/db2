@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Menu, Item } from 'semantic-ui-react'
 
 import AddHostelResident from './actionElements/AddHostelResident';
-
+import AddInventory from './actionElements/AddInventory';
 
 
 class ActionMenuBar extends Component {
     constructor() {
         super();
         this.state = {
-            activeItem: 'addHostelResident'
+            activeItem: 'addInventory'
         }
     }
 
@@ -37,9 +37,16 @@ class ActionMenuBar extends Component {
                     >
                         <h2>Add Hostel Resident</h2>
                     </Menu.Item>
+                    <Menu.Item
+                        name='addInventory'
+                        active={activeItem === 'addInventory'}
+                        onClick={this.onMenuClick}
+                    >
+                        <h2>Add Inventory</h2>
+                    </Menu.Item>
                 </Menu>
                 {activeItem === 'addHostelResident' ? <AddHostelResident /> : null}
-
+                {activeItem === 'addInventory' ? <AddInventory /> : null}
             </div >
         )
     }
