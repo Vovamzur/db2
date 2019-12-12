@@ -7,7 +7,13 @@ class AddHostelResident extends Component {
     constructor() {
         super();
         this.state = {
-            error: undefined
+            firstname: 'Поліна',
+            lastname: 'Сергієнко',
+            group: '',
+            privelege: null,
+            hostel: '',
+            room: '',
+            abilities: null
         }
     }
 
@@ -36,16 +42,44 @@ class AddHostelResident extends Component {
         this.setState({ room: value });
     }
 
+    getId = (arr) => {
+        const allId = arr.map(item => item.id);
+        for (let i = 0; i < allId.length + 1; i++) {
+            if (!allId.includes(i)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     onSubmit = e => {
         const { firstname, lastname, group, privelege, hostel, room, abilities } = this.state;
-        console.log(this.state);
-        console.log(firstname);
-        if (!firstname || !lastname || !group || ! privelege || !hostel || !room || !abilities) {
-            this.setState({ error: 'empty fields' });
-        } else if (firstname === "" || lastname === "" || abilities === "") {
-            this.setState({ error: 'empty fields' });
+        if (firstname === "" || lastname === "" || lastname === "" || group === "" || hostel === "" || room === "") {
+            alert('empty fields');
         } else {
-            this.setState({ error: undefined });
+            const privelegeId = Privelege.filter(item => item.id === privelege)[0].id;
+            const selectedRoom = Room.filter(item => item.id === room)[0]
+            const roomId = selectedRoom.id;
+            const roomCapacity = selectedRoom.capacity;
+            const roomResidentsNumber = HostelResident.filter(item => item.room_id === roomId).length;
+            const student = Student.filter(item => item.firstname === firstname && item.lastname === lastname && item.class_id === group);
+            if (student.length === 0) {
+                alert('no student with such parameters');
+            } else if (HostelResident.filter(item => item.student_id === student[0].id)) {
+                alert('this student already lives in a hostel');
+            } else if (roomResidentsNumber >= roomCapacity) {
+                alert('room is full');
+            } else {
+                const id = this.getId(HostelResident);
+                HostelResident.push(new Object({
+                    id: id,
+                    abilities: abilities,
+                    student_id: student[0].id,
+                    room_id: roomId,
+                    privelege_id: privelegeId
+                }))
+            }
+            console.log(HostelResident);
         }
     }
 
@@ -83,12 +117,14 @@ class AddHostelResident extends Component {
                             fluid
                             id='firstname'
                             placeholder='student firstname'
+                            value={this.state.firstname}
                             onChange={this.onChange}
                         />
                         <Form.Input
                             fluid
                             id='lastname'
                             placeholder='student lastname'
+                            value={this.state.lastname}
                             onChange={this.onChange}
                         />
                         <Form.Select
