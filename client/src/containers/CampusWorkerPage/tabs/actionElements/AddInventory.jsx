@@ -53,27 +53,25 @@ class AddInventory extends Component {
     render() {
 
         return (
-            <div>
+            <div style={{ width: '30%', margin: '50px auto' }}>
                 <Form>
-                    <Form.Group widths='equal'>
-                        <Form.Input
-                            fluid
-                            id='name'
-                            placeholder='name'
-                            value={this.state.firstname}
-                            onChange={this.onChange}
-                        />
-                        <Form.Input
-                            fluid
-                            id='count'
-                            placeholder='count'
-                            value={this.state.lastname}
-                            onChange={this.onChange}
-                        />
-                        <Form.Button onClick={this.onSubmit}>
-                            Submit
-                        </Form.Button>
-                    </Form.Group>
+                    <Form.Input
+                        fluid
+                        id='name'
+                        placeholder='name'
+                        value={this.state.firstname}
+                        onChange={this.onChange}
+                    />
+                    <Form.Input
+                        fluid
+                        id='count'
+                        placeholder='count'
+                        value={this.state.lastname}
+                        onChange={this.onChange}
+                    />
+                    <Form.Button onClick={this.onSubmit} floated="right">
+                        Submit
+                    </Form.Button>
                 </Form>
             </div>
         )

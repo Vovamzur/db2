@@ -104,58 +104,56 @@ class AddHostelResident extends Component {
         }))
 
         return (
-            <div>
+            <div style={{ width: '40%', margin: '50px auto' }}>
                 <Form>
-                    <Form.Group widths='equal'>
-                        <Form.Input
-                            fluid
-                            id='firstname'
-                            placeholder='student firstname'
-                            onChange={this.onChange}
-                        />
-                        <Form.Input
-                            fluid
-                            id='lastname'
-                            placeholder='student lastname'
-                            onChange={this.onChange}
-                        />
-                        <Form.Select
-                            fluid
-                            id='group'
-                            options={groups}
-                            placeholder='group'
-                            onChange={this.onGroupChange}
-                        />
-                        <Form.Select
-                            fluid
-                            id='privelege'
-                            options={priveleges}
-                            placeholder='privelege'
-                            onChange={this.onPrivelegeChange}
-                        />
-                        <Form.Select
-                            fluid
-                            id='hostel'
-                            options={hostels}
-                            placeholder='hostel'
-                            onChange={this.onHostelChange}
-                        />
-                        <Form.Select
-                            fluid
-                            id='room'
-                            options={rooms}
-                            placeholder='room'
-                            onChange={this.onRoomChange}
-                        />
-                        <Form.TextArea
-                            id='abilities'
-                            placeholder='new hostel resident abilities'
-                            onChange={this.onChange}
-                        />
-                        <Form.Button onClick={this.onSubmit}>
-                            Submit
-                        </Form.Button>
-                    </Form.Group>
+                    <Form.Input
+                        fluid
+                        id='firstname'
+                        placeholder='student firstname'
+                        onChange={this.onChange}
+                    />
+                    <Form.Input
+                        fluid
+                        id='lastname'
+                        placeholder='student lastname'
+                        onChange={this.onChange}
+                    />
+                    <Form.Select
+                        fluid
+                        id='group'
+                        options={groups}
+                        placeholder='group'
+                        onChange={this.onGroupChange}
+                    />
+                    <Form.Select
+                        fluid
+                        id='privelege'
+                        options={priveleges}
+                        placeholder='privelege'
+                        onChange={this.onPrivelegeChange}
+                    />
+                    <Form.Select
+                        fluid
+                        id='hostel'
+                        options={hostels}
+                        placeholder='hostel'
+                        onChange={this.onHostelChange}
+                    />
+                    <Form.Select
+                        fluid
+                        id='room'
+                        options={rooms}
+                        placeholder='room'
+                        onChange={this.onRoomChange}
+                    />
+                    <Form.TextArea
+                        id='abilities'
+                        placeholder='new hostel resident abilities'
+                        onChange={this.onChange}
+                    />
+                    <Form.Button onClick={this.onSubmit} floated='right'>
+                        Submit
+                    </Form.Button>
                 </Form>
             </div>
         )
