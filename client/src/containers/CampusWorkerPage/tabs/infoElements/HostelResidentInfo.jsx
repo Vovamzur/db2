@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Image, Item, Grid, Menu , Table} from 'semantic-ui-react'
+import { Table} from 'semantic-ui-react'
 
-import { HostelResident, Student, Class, Hostel, Room, Privelege } from '../../../../db/db';
+import { hostelResidentData, studentData, groupData, hostelData, roomData, privelegeData } from '../../../../db/database';
 
 class HostelResidentInfo extends Component {
     constructor() {
@@ -12,7 +12,7 @@ class HostelResidentInfo extends Component {
     }
 
     componentDidMount() {
-        this.setState({  hostelResident:HostelResident });
+        this.setState({  hostelResident:hostelResidentData });
     }
 
     render() {
@@ -35,16 +35,16 @@ class HostelResidentInfo extends Component {
 
                     <Table.Body>
                         {hostelResident && hostelResident.map(resident => {
-                            const firstname = Student.filter(item => item.id === resident.student_id)[0].firstname;
-                            const lastname = Student.filter(item => item.id === resident.student_id)[0].lastname;
-                            const class_id = Student.filter(item => item.id === resident.student_id)[0].class_id;
-                            const class_title = Class.filter(item => item.id === class_id)[0].title;
-                            const hostel_id = Room.filter(item => item.id === resident.room_id)[0].hostel_id;
-                            const hostel_no = Hostel.filter(item => item.id === hostel_id)[0].number;
-                            const room_no = Room.filter(item => item.id === resident.room_id)[0].number;
-                            const privelege = Privelege.filter(item => item.id === resident.privelege_id)[0]
-                            const privelege_per = (privelege ? privelege.discount : "null");
-                            const privelege_type = (privelege ? privelege.name : "null");
+                            const firstname = studentData.filter(item => item.id === resident.studentId)[0].firstname;
+                            const lastname = studentData.filter(item => item.id === resident.studentId)[0].lastname;
+                            const class_id = studentData.filter(item => item.id === resident.studentId)[0].classId;
+                            const class_title = groupData.filter(item => item.id === class_id)[0].title;
+                            const hostel_id = roomData.filter(item => item.id === resident.roomId)[0].hostelId;
+                            const hostel_no = hostelData.filter(item => item.id === hostel_id)[0].number;
+                            const room_no = roomData.filter(item => item.id === resident.roomId)[0].number;
+                            const priv = privelegeData.filter(item => item.id === resident.privelegeId)[0]
+                            const privelege_per = (priv ? priv.discount : "null");
+                            const privelege_type = (priv ? priv.name : "null");
 
                             return (
                                     <Table.Row>

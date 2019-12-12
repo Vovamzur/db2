@@ -1,4 +1,4 @@
-export const academic = [
+export const academicData = [
     {id:0 , firstname:'Олег', lastname: 'Лісовиченко', recruitment_date:'2019-09-25'},
     {id:1 , firstname:'Генадій', lastname: 'Рябцев', recruitment_date:'2019-09-25'},
     {id:2 , firstname:'Наталя', lastname: 'Корнієнко', recruitment_date:'2019-09-25'},
@@ -21,7 +21,7 @@ export const academic = [
     {id:19, firstname:'Adena', lastname: 'Cooper', recruitment_date:'2019-02-28'},
 ]
 
-export const building = [
+export const buildingData = [
     {id:0, auditoriesAmount:31, number:1, address:'Mollis Av.'},
     {id:1, auditoriesAmount:32, number:2, address:'Cum Street'},
     {id:2, auditoriesAmount:33, number:3, address:'Proin St.'},
@@ -29,7 +29,7 @@ export const building = [
     {id:4, auditoriesAmount:35, number:5, address:'Ave St'},
 ]
 
-export const auditorium = [
+export const auditoriumData = [
     {id:0 , capacity:25, buildingId:0, computersAvailability:'t', number:101},
     {id:5 , capacity:20, buildingId:0, computersAvailability:'t', number:326},
     {id:10, capacity:25, buildingId:0, computersAvailability:'t', number:228},
@@ -52,18 +52,18 @@ export const auditorium = [
     {id:19, capacity:30, buildingId:4, computersAvailability:'t', number:230},
 ]
 
-export const controlType = [
+export const controlTypeData = [
     {id:0, type:'Іспит', description:'decsription'},
     {id:1, type:'Екзамен', description:'decsription'},
     {id:2, type:'Курсова', description:'decsription'},
 ]
 
-export const departmentType = [
+export const departmentTypeData = [
     {id:0, type:'факультет'},
     {id:1, type:'інститут'}
 ]
 
-export const department = [
+export const departmentData = [
     {id:0, title:'ФІОТ', headId:0, departmentTypeId:0},
     {id:1, title:'ІПСА', headId:1, departmentTypeId:1},
     {id:2, title:'ФММ', headId:2, departmentTypeId:0},
@@ -71,20 +71,20 @@ export const department = [
     {id:4, title:'ФТІ', headId:4, departmentTypeId:0},
 ]
 
-export const hostel = [
-    {id:1, number:8, head:'Тимошенко Н.В.'},
-    {id:2, number:10,head:'Смішний Г.Г.'},
-    {id:3, number:1, head:'Дорошенко А.К.'},
-    {id:4, number:2, head:'Крикун О.В.'},
-    {id:5, number:3, head:'Іваненко Н.Р.'},
-    {id:6, number:4, head:'Сидоров Н.С.'},
-    {id:7, number:5, head:'Міщенко К.В.'},
-    {id:8, number:6, head:'Бондаренко М.С.'},
-    {id:9, number:7, head:'Біла А.В.'},
-    {id:10, number:9, head:'Чорна І.К.'},
+export const hostelData = [
+    {id:0, number:8, head:'Тимошенко Н.В.'},
+    {id:1, number:10,head:'Смішний Г.Г.'},
+    {id:2, number:1, head:'Дорошенко А.К.'},
+    {id:3, number:2, head:'Крикун О.В.'},
+    {id:4, number:3, head:'Іваненко Н.Р.'},
+    {id:5, number:4, head:'Сидоров Н.С.'},
+    {id:6, number:5, head:'Міщенко К.В.'},
+    {id:7, number:6, head:'Бондаренко М.С.'},
+    {id:8, number:7, head:'Біла А.В.'},
+    {id:9, number:9, head:'Чорна І.К.'},
 ]
 
-export const cathedra = [
+export const cathedraData = [
     {id:0, title:'ТК', departmentId:0, deanId:0},
     {id:1, title:'ОТ', departmentId:0, deanId:5},
     {id:2, title:'СА', departmentId:1, deanId:1},
@@ -97,7 +97,7 @@ export const cathedra = [
     {id:9, title:'ОП', departmentId:4, deanId:9},
 ]
 
-export const cathedraEmployee = [
+export const cathedraEmployeeData = [
     {id:0 , academicId:0 , cathedraId:0},
     {id:1 , academicId:1 , cathedraId:1},
     {id:2 , academicId:2 , cathedraId:2},
@@ -120,7 +120,7 @@ export const cathedraEmployee = [
     {id:19, academicId:19, cathedraId:4},
 ]
 
-export const discipline = [
+export const disciplineData = [
     {id:0, title:'БД', description:'description'},
     {id:1, title:'ООП', description:'description'},
     {id:2, title:'ЛААГ', description:'description'},
@@ -133,12 +133,12 @@ export const discipline = [
     {id:9, title:'Історія', description:'description'},
 ]
 
-export const roomType = [
+export const roomTypeData = [
     {id:0, name:'коридорний', price:560},
     {id:1, name:'блочний', price:700},
 ]
 
-export const room = [
+export const roomData = [
     {id:0, number:1, capacity:3, hostelId:0, roomTypeId:0},
     {id:1, number:1, capacity:4, hostelId:1, roomTypeId:0},
     {id:2, number:1, capacity:4, hostelId:2, roomTypeId:0},
@@ -171,20 +171,20 @@ export const room = [
     {id:29, number:10, capacity:4, hostelId:2, roomTypeId:0},
 ]
 
-export const privelege = [
+export const privelegeData = [
     {id:0, name:'дитина шахтаря', discount:50},
     {id:1, name:'дитина-сирота', discount:100},
     {id:2, name:'дитина учасника АТО', discount:50},
 ]
 
-export const specialty = [
+export const specialtyData = [
     {id:0, area:12, code:1, title:'ІПЗ'},
     {id:1, area:12, code:2, title:'КН'},
     {id:2, area:12, code:3, title:'КІ'},
-    {id:3, area:03, code:3, title:'ММ'},
+    {id:3, area:3, code:3, title:'ММ'},
 ]
 
-export const scientificProposal = [
+export const scientificProposalData = [
     {id:0, cathedraId:0, specialtyId:0},
     {id:1, cathedraId:1, specialtyId:1},
     {id:2, cathedraId:2, specialtyId:2},
@@ -197,7 +197,7 @@ export const scientificProposal = [
     {id:9, cathedraId:9, specialtyId:2},
 ]
 
-export const group = [
+export const groupData = [
     {id:0, title:'ІТ-71', scientificProposalId:0, curatorId:15},
     {id:1, title:'ІО-71', scientificProposalId:1, curatorId:16},
     {id:2, title:'ПА-71', scientificProposalId:2, curatorId:17},
@@ -210,7 +210,7 @@ export const group = [
     {id:9, title:'ТВ-71', scientificProposalId:9, curatorId:14},
 ]
 
-export const student = [
+export const studentData = [
     {id:0 , firstname:'Поліна', midlname:'Анатоліївна', lastname:'Сергієнко', hostelNeed:'t', classId:0},
     {id:1 , firstname:'Ірина', midlname:'Анатоліївна', lastname:'Матвійчук', hostelNeed:'t', classId:0},
     {id:2 , firstname:'Володимир', midlname:'Олегович', lastname:'Мазур', hostelNeed:'t', classId:0},
@@ -243,7 +243,7 @@ export const student = [
     {id:29, firstname:'Zorita', midlname:'Drew', lastname:'Rose', hostelNeed:'t', classId:9},
 ]
 
-export const inventory = [
+export const inventoryData = [
     {id:0, name:'матрац', count:1030},
     {id:1, name:'покривало', count:1025},
     {id:2, name:'ковдра', count:1118},
@@ -256,7 +256,7 @@ export const inventory = [
     {id:9, name:'шафа', count:1054},
 ]
 
-export const hostelResident = [
+export const hostelResidentData = [
     {id:0, studentId:0, roomId:0, privelegeId:null},
     {id:1, studentId:1, roomId:0, privelegeId:null},
     {id:2, studentId:2, roomId:6, privelegeId:null},
@@ -269,7 +269,7 @@ export const hostelResident = [
     {id:9, studentId:9, roomId:10, privelegeId:0},
 ]
 
-export const cheque = [
+export const chequeData = [
     {id:0 , paymentDate:'2019-09-01', sum:1400, startDate:'2019-09-01', endDate:'2019-11-30',hostelResidentId:0},
     {id:1 , paymentDate:'2019-09-02', sum:2000, startDate:'2019-09-01', endDate:'2019-11-30',hostelResidentId:1},
     {id:2 , paymentDate:'2019-09-13', sum:1500, startDate:'2019-09-01', endDate:'2019-11-30',hostelResidentId:2},
@@ -292,7 +292,7 @@ export const cheque = [
     {id:19, paymentDate:'2019-12-11', sum:500, startDate:'2019-11-01', endDate:'2019-11-30',hostelResidentId:3},
 ]
 
-export const subjectTeaching = [
+export const subjectTeachingData = [
     {id:0, basicDiscipline:'t',disciplineId:0,cathedraEmployeeId:0, classId:0, controlTypeId:1},
     {id:1, basicDiscipline:'t',disciplineId:1,cathedraEmployeeId:1, classId:1, controlTypeId:1},
     {id:2, basicDiscipline:'t',disciplineId:2,cathedraEmployeeId:2, classId:2, controlTypeId:1},
@@ -325,7 +325,7 @@ export const subjectTeaching = [
     {id:29, basicDiscipline:'t',disciplineId:9,cathedraEmployeeId:19, classId:9, controlTypeId:1},
 ]
 
-export const lesson = [
+export const lessonData = [
     {id:0, subjectTeachingId:0,day:'mon',time:'08:30:00',auditoriumId:0},
     {id:1, subjectTeachingId:1,day:'tue',time:'10:25:00',auditoriumId:5},
     {id:2, subjectTeachingId:2,day:'wed',time:'12:20:00',auditoriumId:10},
@@ -388,7 +388,7 @@ export const lesson = [
     {id:59, subjectTeachingId:29,day:'fri',time:'08:30:00',auditoriumId:19},
 ]
 
-export const doInventory = [
+export const doInventoryData = [
     {id:0, date:'2019-08-27', inventoryId:0, hostelResidentId:0},
     {id:1, date:'2019-08-28', inventoryId:1, hostelResidentId:1},
     {id:2, date:'2019-08-29', inventoryId:2, hostelResidentId:2},
@@ -401,7 +401,7 @@ export const doInventory = [
     {id:9, date:'2019-08-28', inventoryId:9, hostelResidentId:9},
 ]
 
-export const exam = [
+export const examData = [
     {id:0, mark:100, studentId:9, subjectTeachingId:3, auditoriumId:0},
     {id:1, mark:98, studentId:12, subjectTeachingId:4, auditoriumId:5},
     {id:2, mark:76, studentId:15, subjectTeachingId:5, auditoriumId:10},

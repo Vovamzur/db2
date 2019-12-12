@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'semantic-ui-react'
 
-import { Hostel, Cheque, HostelResident, Student, Room, RoomType } from '../../../../db/db';
+import { chequeData, hostelResidentData, studentData, roomData, roomTypeData } from '../../../../db/database';
 
 class CountPayments extends Component {
     constructor() {
@@ -12,7 +12,7 @@ class CountPayments extends Component {
     }
 
     componentDidMount() {
-        this.setState({  cheque:Cheque, resident: HostelResident });
+        this.setState({  cheque:chequeData, resident: hostelResidentData });
     }
 
     sumArray(arr) {
@@ -39,16 +39,16 @@ class CountPayments extends Component {
 
                     <Table.Body>
                         {resident && resident.map(res => {
-                            const student = Student.filter(item => item.id === res.id)[0];
-                            const residentChecks = Cheque.filter(item => item.hostelresident_id === res.id);
+                            const stud = studentData.filter(item => item.id === res.id)[0];
+                            const residentChecks = chequeData.filter(item => item.hostelResidentId === res.id);
                             const sums = residentChecks.map(item => item.sum);
                             const sum = sums.length === 0 ? 0 : this.sumArray(sums);
-                            const roomTypeId = Room.filter(item => item.id === res.room_id)[0].roomtype_id;
-                            const roomPrice = RoomType.filter(item => item.id === roomTypeId)[0].price;
+                            const roomTypeId = roomData.filter(item => item.id === res.roomId)[0].roomTypeId;
+                            const roomPrice = roomTypeData.filter(item => item.id === roomTypeId)[0].price;
                             const totalSum = roomPrice * 4;
                             return (
                                 <Table.Row>
-                                    <Table.Cell>{student.firstname} {student.lastname}</Table.Cell>
+                                    <Table.Cell>{stud.firstname} {stud.lastname}</Table.Cell>
                                     <Table.Cell>{sum}</Table.Cell>
                                     <Table.Cell>{residentChecks.length}</Table.Cell>
                                     <Table.Cell>{sum - totalSum}</Table.Cell>
