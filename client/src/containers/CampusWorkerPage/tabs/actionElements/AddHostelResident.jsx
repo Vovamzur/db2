@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Label } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 
 import { hostelData, hostelResidentData, studentData, roomData, groupData, privelegeData } from '../../../../db/database';
 
@@ -18,27 +18,22 @@ class AddHostelResident extends Component {
     }
 
     onChange = e => {
-        console.log(e);
         this.setState({ [e.target.id]: e.target.value });
     }
 
     onGroupChange = (e, { value }) => {
-        console.log(value);
         this.setState({ group: value });
     }
 
     onPrivelegeChange = (e, { value }) => {
-        console.log(value);
         this.setState({ privelege: value });
     }
 
     onHostelChange = (e, { value }) => {
-        console.log(value);
         this.setState({ hostel: value });
     }
 
     onRoomChange = (e, { value }) => {
-        console.log(value);
         this.setState({ room: value });
     }
 
@@ -63,7 +58,6 @@ class AddHostelResident extends Component {
             const roomCapacity = selectedRoom.capacity;
             const roomResidentsNumber = hostelResidentData.filter(item => item.roomId === roomId).length;
             const student = studentData.filter(item => item.firstname === firstname && item.lastname === lastname && item.classId === group);
-            console.log(student);
             if (student.length === 0) {
                 alert('no student with such parameters');
             } else if (hostelResidentData.filter(item => item.studentId === student[0].id).length > 0) {
@@ -80,12 +74,10 @@ class AddHostelResident extends Component {
                     privelegeId: privelegeId
                 }))
             }
-            console.log(hostelResidentData);
         }
     }
 
     render() {
-        console.log(hostelResidentData);
         const groups = groupData.map(item => new Object({
             key: item.title,
             text: item.title,
@@ -162,9 +154,6 @@ class AddHostelResident extends Component {
                             placeholder='new hostel resident abilities'
                             onChange={this.onChange}
                         />
-                        <Label style={this.state.error ? {} : {display: 'none'}}>
-                            <h1 style={{color:'red'}}>{this.state.error}</h1>
-                        </Label>
                         <Form.Button onClick={this.onSubmit}>
                             Submit
                         </Form.Button>
