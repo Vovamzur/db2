@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form } from 'semantic-ui-react'
+import { Form, Label } from 'semantic-ui-react'
 
 import { Hostel, Cheque, HostelResident, Student, Room, RoomType, Class, Privelege } from '../../../../db/db';
 
@@ -7,13 +7,9 @@ class AddHostelResident extends Component {
     constructor() {
         super();
         this.state = {
+            error: undefined
         }
     }
-
-    componentDidMount() {
-        // this.setState({  cheque:Cheque, resident: HostelResident });
-    }
-
 
     onChange = e => {
         console.log(e);
@@ -40,8 +36,20 @@ class AddHostelResident extends Component {
         this.setState({ room: value });
     }
 
-    render() {
+    onSubmit = e => {
+        const { firstname, lastname, group, privelege, hostel, room, abilities } = this.state;
         console.log(this.state);
+        console.log(firstname);
+        if (!firstname || !lastname || !group || ! privelege || !hostel || !room || !abilities) {
+            this.setState({ error: 'empty fields' });
+        } else if (firstname === "" || lastname === "" || abilities === "") {
+            this.setState({ error: 'empty fields' });
+        } else {
+            this.setState({ error: undefined });
+        }
+    }
+
+    render() {
         const groups = Class.map(item => new Object({
             key: item.title,
             text: item.title,
@@ -111,6 +119,17 @@ class AddHostelResident extends Component {
                             placeholder='room'
                             onChange={this.onRoomChange}
                         />
+                        <Form.TextArea
+                            id='abilities'
+                            placeholder='new hostel resident abilities'
+                            onChange={this.onChange}
+                        />
+                        <Label style={this.state.error ? {} : {display: 'none'}}>
+                            <h1 style={{color:'red'}}>{this.state.error}</h1>
+                        </Label>
+                        <Form.Button onClick={this.onSubmit}>
+                            Submit
+                        </Form.Button>
                     </Form.Group>
                 </Form>
             </div>
