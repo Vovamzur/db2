@@ -1,18 +1,9 @@
-import React, { useState } from 'react';
-import { Dropdown, Input, Button } from 'semantic-ui-react';
+import React, { useState, useEffect } from 'react';
+import { Dropdown, Input, Button, Table } from 'semantic-ui-react';
 
 import { chequeData, groupData, hostelResidentData, studentData } from '../../../db/database';
 
-
-let groups = []
-for (const group of groupData) {
-	groups.push(new Object({
-		id:group.id,
-		text: group.title,
-		value: group.title
-	}))
-}
-
+let groups = groupData.map(({ id, title }) => ({ id, text: title, value: title }))
 const monthes = [
 	{ key: 9, text: 'Вересень', value: 'Вересень' },
 	{ key: 10, text: 'Жовтень', value: 'Жовтень' },
@@ -51,7 +42,9 @@ const PayDormitory = () => {
 	const [studentFirstname, setStudentFirstname] = useState('');
 	const [studentLastname, setStudentLastname] = useState('');
 	const [sum, setSum] = useState('');
-	const [currentMonth, setCurrentMonth] = useState({ key: 12, text: 'Грудень', value: 'Грудень' })
+	const [currentMonth, setCurrentMonth] = useState({ key: 12, text: 'Грудень', value: 'Грудень' });
+	const [cheques, setCheques] = useState(inCheques);
+	const [tmp, setTmp] = useState(chequeData)
 
 	const onSubmit = e => {
 		e.preventDefault();
@@ -73,26 +66,89 @@ const PayDormitory = () => {
 				const currentDateTime = new Date();
 				chequeData.push(new Object({
 					id: id,
-					paymentDate:currentDateTime.toISOString().split("T")[0],
+					paymentDate: currentDateTime.toISOString().split("T")[0],
 					sum: sum,
-					startDate:dates[currentMonth.value].startDate,
-					endDate:dates[currentMonth.value].endDate,
+					startDate: dates[currentMonth.value].startDate,
+					endDate: dates[currentMonth.value].endDate,
 					hostelResidentId: hostelResident.id
 				}));
 				console.log(chequeData);
+				const cheques = tmp
+				setCheques(cheques)
 			}
 		}
 	}
 
+	const renderChecks = () => {
+		return (
+			<div style={{ margin: '20px 0' }} >
+				<Table unstackable>
+					<Table.Header>
+						<Table.Row>
+							<Table.HeaderCell>Payment date #</Table.HeaderCell>
+							<Table.HeaderCell>Sum</Table.HeaderCell>
+							<Table.HeaderCell>Start date</Table.HeaderCell>
+							<Table.HeaderCell>End date</Table.HeaderCell>
+							<Table.HeaderCell>Hostel resident</Table.HeaderCell>
+						</Table.Row>
+					</Table.Header>
+
+					<Table.Body>
+						{tmp && tmp.map(cheque => {
+							const resident_id = hostelResidentData.filter(item => item.id === cheque.hostelResidentId)[0].studentId;
+							const stud = studentData.filter(item => item.id === resident_id)[0];
+							return (
+								<Table.Row>
+									<Table.Cell>{cheque.paymentDate}</Table.Cell>
+									<Table.Cell>{cheque.sum}</Table.Cell>
+									<Table.Cell>{cheque.startDate}</Table.Cell>
+									<Table.Cell>{cheque.endDate}</Table.Cell>
+									<Table.Cell>{stud.firstname} {stud.lastname}</Table.Cell>
+								</Table.Row>
+							)
+						})}
+					</Table.Body>
+				</Table>
+			</div>
+		)
+	}
+
 	const getId = (arr) => {
-        const allId = arr.map(item => item.id);
-        for (let i = 0; i < allId.length + 1; i++) {
-            if (!allId.includes(i)) {
-                return i;
-            }
-        }
-        return null;
-    }
+		const allId = arr.map(item => item.id);
+		for (let i = 0; i < allId.length + 1; i++) {
+			if (!allId.includes(i)) {
+				return i;
+			}
+		}
+		return null;
+	}
+
+	const renderCheques = () => {
+		return (
+			<table className="ui celled structured table">
+				<thead>
+					<tr>
+						<th rowSpan="2">Month</th>
+						<th rowSpan="2">Sum</th>
+						<th rowSpan="2">Payment date</th>
+						<th rowSpan="2">Dormitory</th>
+					</tr>
+				</thead>
+				<tbody>
+					{cheques.map(({ key, month, sum, date, dormitory }) => {
+						return (
+							<tr key={Math.random() + key}>
+								<td>{month}</td>
+								<td>{sum}</td>
+								<td>{date}</td>
+								<td>{dormitory}</td>
+							</tr>
+						)
+					})}
+				</tbody>
+			</table>
+		)
+	}
 
 	const renderForm = () => {
 		return (
@@ -102,20 +158,21 @@ const PayDormitory = () => {
 					selection
 					options={groups}
 					onChange={(e, value) => setCurrentClass(value)}
+					style={{ margin: '10px' }}
 				/>
-				<div>
+				<div style={{ margin: '10px' }}>
 					<Input
 						onChange={e => setStudentFirstname(e.target.value)}
 						placeholder='firstname'
 					/>
 				</div>
-				<div>
+				<div style={{ margin: '10px' }}>
 					<Input
 						onChange={e => setStudentLastname(e.target.value)}
 						placeholder='lastname'
 					/>
 				</div>
-				<div>
+				<div style={{ margin: '10px' }}>
 					<Input
 						value={sum}
 						onChange={e => setSum(e.target.value)}
@@ -132,6 +189,7 @@ const PayDormitory = () => {
 				<Button onClick={onSubmit}>
 					Pay!
 				</Button>
+				{renderChecks()}
 			</div>
 		)
 	}

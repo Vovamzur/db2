@@ -65,7 +65,7 @@ const AddSubject = () => {
     console.log(lessonData)
   }
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: 'flex', margin: '0 auto', flexDirection: 'column', width: '500px' }}>
       <label><h4>Teacher</h4></label>
       <Dropdown
         placeholder='Select teacher'
@@ -73,6 +73,7 @@ const AddSubject = () => {
         options={teachers}
         value={currentTeacher.value}
         onChange={(e, value) => setCurrentTeacher(value)}
+        style={{ margin: '12px 0 20px 0' }}
       />
       <label><h4>Audotorium</h4></label>
       <Input 
@@ -80,6 +81,7 @@ const AddSubject = () => {
         onChange={e => setAudorium(e.target.value)}
         placeholder="Enter audotorium number"
         type="number"
+        style={{ margin: '12px 0 20px 0' }}
       />
       <label><h4>Discipline</h4></label>
       <Dropdown
@@ -88,14 +90,7 @@ const AddSubject = () => {
         options={disciplines}
         value={currentDiscipline.value}
         onChange={(e, value) => setCurrentDiscipline(value)}
-      />
-      <label><h4>Discipline</h4></label>
-      <Dropdown
-        placeholder='Select discipline'
-        selection
-        options={disciplines}
-        value={currentDiscipline.value}
-        onChange={(e, value) => setCurrentDiscipline(value)}
+        style={{ margin: '12px 0 20px 0' }}
       />
       <label><h4>Group</h4></label>
       <Dropdown
@@ -104,14 +99,16 @@ const AddSubject = () => {
         options={groups}
         value={currentGroup.value}
         onChange={(e, value) => setCurrentGroup(value)}
+        style={{ margin: '12px 0 20px 0' }}
       />
       <label><h4>Date</h4></label>
       <Input 
         value={currentDate}
         onChange={e => setCurrentDate(e.target.value)}
         placeholder="Enter date"
+        style={{ margin: '12px 0 20px 0' }}
       />
-      <Button onClick={onSubmit}>Submit</Button>
+      <Button onClick={onSubmit} floated="right">Submit</Button>
     </div>
   )
 }
