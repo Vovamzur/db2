@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   lessonData,
@@ -10,17 +10,23 @@ import {
   academicData
 } from './../../../db/database'
 
-const schedule = lessonData.map(({ id, subjectTeachingId, day, time, auditoriumId }) => {
-  const { disciplineId, cathedraEmployeeId, classId } = subjectTeachingData.find(({ id }) => id === subjectTeachingId);
-  const { number: auditorium } = auditoriumData.find(({ id }) => id === auditoriumId);
-  const { title: subjectName } = disciplineData.find(({ id }) => id === disciplineId);
-  const { academicId } = cathedraEmployeeData.find(({ id }) => id === cathedraEmployeeId);
-  const { title: groupName } = groupData.find(({ id }) => id === classId);
-  const { firstname, lastname } = academicData.find(({ id }) => id === academicId);
-
-  return { id, subjectName, auditorium, groupName, teacher: firstname + ' ' + lastname, day, time }
-})
 const LessonSchedule = () => {
+  const [schedule, setSchedule] = useState([])
+  useEffect(() => {
+    const mappedLessons = lessonData.map(({ id, subjectTeachingId, day, time, auditoriumId }) => {
+      const { disciplineId, cathedraEmployeeId, classId } = subjectTeachingData.find(({ id }) => id === subjectTeachingId);
+      const { number: auditorium } = auditoriumData.find(({ id }) => id === auditoriumId);
+      const { title: subjectName } = disciplineData.find(({ id }) => id === disciplineId);
+      const { academicId } = cathedraEmployeeData.find(({ id }) => id === cathedraEmployeeId);
+      const { title: groupName } = groupData.find(({ id }) => id === classId);
+      const { firstname, lastname } = academicData.find(({ id }) => id === academicId);
+    
+      return { id, subjectName, auditorium, groupName, teacher: firstname + ' ' + lastname, day, time }
+    })
+
+    setSchedule(mappedLessons)
+  }, [])
+
   const renderSchedule = () => {
     return (
       <table className="ui celled structured table">
