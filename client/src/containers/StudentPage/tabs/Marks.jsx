@@ -1,30 +1,24 @@
 import React, { useState } from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 
-const marks = [
-  { key: 1, sem: '1', subject: 'Основи права', controlType: 'залік', mark: 96 },
-  { key: 2, sem: '1', subject: 'Основи радіотехніки', controlType: 'екзамен', mark: 98 },
-  { key: 3, sem: '2', subject: 'Бази даних', controlType: 'залік', mark: 100 },
-  { key: 4, sem: '2', subject: 'Основи програмування', controlType: 'екзамен', mark: 95 },
-  { key: 5, sem: '3', subject: 'Основи менеджменту', controlType: 'залік', mark: 98 },
-  { key: 6, sem: '3', subject: 'Українська мова', controlType: 'екзамен', mark: 99 },
-]
+import { examData, disciplineData, controlTypeData, studentData, subjectTeachingData } from '../../../db/database';
 
-const semesters = [
-  { key: 1, text: '1 semester', value: '1 semester' },
-  { key: 2, text: '2 semester', value: '2 semester' },
-  { key: 3, text: '3 semester', value: '3 semester' },
-]
 
 const Marks = () => {
-  const [currentSemester, setCurrentSemester] = useState({ key: 1, text: '1 semester', value: '1 semester' })
+  const [query, setQuery] = useState('');
 
-  const getAvarageMark = () => {
-    const currentMarks = marks
-      .filter(m => currentSemester.value ? currentSemester.value.charAt(0) === m.sem : m)
-      .map(m => m.mark)
-    const sum = currentMarks.reduce((acc, cur) => acc + cur, 0);
-    return sum / currentMarks.length;
+  const matches = (firstname, lastname) => {
+    const queryParts = query.split(/ +/);
+    if (query === "") {
+      return true;
+    } else {
+      for (const part of queryParts) {
+        if ((firstname + " " + lastname).includes(part)) {
+          return true;
+        }
+      }
+      return false;
+    }
   }
 
   const renderMarks = () => {
@@ -32,22 +26,32 @@ const Marks = () => {
       <table className="ui celled structured table">
         <thead>
           <tr>
+            <th rowSpan="2">Student</th>
             <th rowSpan="2">Subject</th>
             <th rowSpan="2">Control type</th>
             <th rowSpan="2">Mark</th>
           </tr>
         </thead>
         <tbody>
-          {marks
-            .filter(m => currentSemester.value && currentSemester.value.charAt(0) === m.sem)
-            .map(({ key, sem, subject, controlType, mark }) => {
-              return (
-                <tr key={key}>
-                  <td>{subject}</td>
-                  <td>{controlType}</td>
-                  <td>{mark}</td>
-                </tr>
-              )
+          {studentData
+            .filter(student => matches(student.firstname, student.lastname))
+            .map(student => {
+              const exam = examData.filter(item => item.studentId === student.id);
+              for (const ex of exam) {
+                const subjectTeaching = subjectTeachingData.filter(item => item.id === ex.subjectTeachingId)[0];
+                const controlType = controlTypeData.filter(item => item.id === subjectTeaching.controlTypeId)[0];
+                const discipline = disciplineData.filter(item => item.id === subjectTeaching.disciplineId)[0];
+                return (
+                  <div>
+                    <tr key={student.id}>
+                      <td>{student.firstname} {student.lastname}</td>
+                      <td>{discipline.title}</td>
+                      <td>{controlType.type}</td>
+                      <td>{ex.mark}</td>
+                    </tr>
+                  </div>
+                )
+              }
             })}
         </tbody>
       </table>
@@ -57,21 +61,9 @@ const Marks = () => {
   return (
     <div className="ui middle aligned center aligned grid">
       <div className="column">
-        <Dropdown
-          placeholder='Select semester'
-          selection
-          options={semesters}
-          value={currentSemester.value}
-          onChange={(e, value) => setCurrentSemester(value)}
-        />
+        <Input type="text" onChange={e => setQuery(e.target.value)} placeholder="name" />
         <div style={{ marginTop: '20px' }}>
-          {currentSemester.value ? renderMarks() : null}
-          {currentSemester.value
-            ? <div>
-              <span>Avarage mark: </span>
-              <span>{getAvarageMark()}</span>
-            </div>
-            : null}
+          {query ? renderMarks() : null}
         </div>
       </div>
     </div>
